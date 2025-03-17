@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.apache.ibatis.io.Resources"/>
+    <fullyQualifiedTypeName name="org.apache.tomcat.util.net.TLSClientHelloExtractor"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.reflection.SystemMetaObject"/>
+    <fullyQualifiedTypeName name="com.kh.mybatis.member.service.MemberService"/>
+    <fullyQualifiedTypeName name="com.kh.mybatis.member.service.MemberServiceImpl"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
+    <fullyQualifiedTypeName name="java.lang.reflect.Member"/>
+    <fullyQualifiedTypeName name="com.kh.mybatis.member.dao.MemberDao"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.session.RowBounds"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="com.kh.mybatis.board.service.BoardService"/>
+    <fullyQualifiedTypeName name="com.kh.mybatis.board.service.BoardServiceImpl"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="com.kh.mybatis.common.PageInfo"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpServletResponse"/>
+    <fullyQualifiedTypeName name="com.kh.mybatis.board.model.vo.Reply"/>
+</qualifiedTypeNameHistroy>

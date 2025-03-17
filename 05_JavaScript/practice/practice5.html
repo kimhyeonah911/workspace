@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 외부라이브러리 -->
+    <!-- jQuery 3.7.1 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- jQueryUI 1.14.1 -->
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js" integrity="sha256-AlTido85uXPlSyyaZNsjJXeCs07eSv3r43kyCVc8ChI=" crossorigin="anonymous"></script>
+
+    <style>
+        #result{
+            width: 700px;
+            height: 150px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Practice5</h1>
+    <fieldset>
+        <legend>구매 정보</legend>
+        <ul id="buy-info">
+            <li>구매자 : <input data-key="구매자 명" type="text" id="buy-name" placeholder="구매자의 이름을 입력하세요"></li>
+            <li>상품 명 : <input data-key="상품 명" type="text" id="goods-name" placeholder="구매 상품 명을 입력하세요"></li>
+            <li>가격 : <input data-key="가격" type="number" id="price" placeholder="구매 가격을 입력하세요"></li>
+            <li>구매 수량 : <input data-key="구매 수량" type="number" id="buy-count" min="10" max="100" step="10" placeholder="최소 10"></li>
+            <li>납품 등급 : <input data-key="납품 등급" type="range" id="grade" min="1" max="9" step="2" value="1"></li>
+            <li>기타 사항 : <textarea data-key="기타 사항" cols="30" id="etc" rows="5"></textarea></li>
+        </ul>
+    </fieldset>
+    <br>
+    <button id="submit" onclick="textPrint()">입력 값 출력하기</button>
+    <br><br>
+    <div id="result"></div>
+
+    
+    <script>
+        /*$('#submit').click(function(){
+            $("#result").append("구매자 명 : " + $('#buy-name').val() +"님<br>");
+            $("#result").append("상품 명 : "+ $('#goods-name').val() +"<br>");
+            $("#result").append("가격 : " + $('#price').val() +"만원<br>");
+            $("#result").append("구매 수량 : " + $('#buy-count').val() +"개<br>");
+            $("#result").append("납품 등급 : " + $('#grade').val() +"등급<br>");
+            $("#result").append("기타 사항 : " + $('#etc').val() +"<br>");
+        })*/
+
+        function textPrint(){
+            let liArr = document.querySelectorAll("#buy-info > li");
+            console.log(liArr);
+            let result="";
+
+            for(let li of liArr){
+                let valueObj = li.children[0];
+                result += (valueObj.dataset.key + " : " + valueObj.value + "<br>");
+                console.log(li.children[0].dataset);
+                console.log(li.children[0].value);
+            }
+
+            document.querySelector("#result").innerHTML = result;
+        }
+    </script>
+</body>
+</html>

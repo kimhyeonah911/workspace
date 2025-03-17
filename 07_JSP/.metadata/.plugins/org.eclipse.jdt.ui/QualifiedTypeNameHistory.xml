@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.sql.Statement"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="com.kh.common.JDBCTemplate"/>
+    <fullyQualifiedTypeName name="java.nio.charset.Charset"/>
+    <fullyQualifiedTypeName name="com.kh.board.service.BoardService"/>
+    <fullyQualifiedTypeName name="org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload"/>
+    <fullyQualifiedTypeName name="netscape.javascript.JSObject"/>
+</qualifiedTypeNameHistroy>

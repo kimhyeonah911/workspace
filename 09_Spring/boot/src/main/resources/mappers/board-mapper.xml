@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.boot.mappers.BoardMapper">
+    <resultMap id="boardResult" type="Board">
+        <result column="BOARD_NO" property="boardNo"/>
+        <result column="BOARD_TITLE" property="boardTitle"/>
+        <result column="BOARD_WRITER" property="boardWriter"/>
+        <result column="BOARD_CONTENT" property="boardContent"/>
+        <result column="ORIGIN_NAME" property="originName"/>
+        <result column="CHANGE_NAME" property="changeName"/>
+        <result column="COUNT" property="count"/>
+        <result column="CREATE_DATE" property="createDate"/>
+        <result column="STATUS" property="status"/>
+    </resultMap>
+    <resultMap id="replyResult" type="Reply">
+        <result column="REPLY_NO" property="replyNo"/>
+        <result column="REPLY_CONTENT" property="replyContent"/>
+        <result column="REF_BNO" property="refBno"/>
+        <result column="REPLY_WRITER" property="replyWriter"/>
+        <result column="CREATE_DATE" property="createDate"/>
+        <result column="STATUS" property="status"/>
+    </resultMap>
+    <resultMap id="PboardResult" type="PictureBoard">
+        <result column="PBOARD_NO" property="pboardNo"/>
+        <result column="PBOARD_TITLE" property="pboardTitle"/>
+        <result column="PBOARD_WRITER" property="pboardWriter"/>
+        <result column="CHANGE_NAME" property="changeName"/>
+        <result column="COUNT" property="count"/>
+        <result column="CREATE_DATE" property="createDate"/>
+        <result column="STATUS" property="status"/>
+    </resultMap>
+    <resultMap id="AttachmentResult" type="Attachment">
+        <result column="FILE_NO" property="fileNo"/>
+        <result column="REF_BNO" property="refBno"/>
+        <result column="ORIGIN_NAME" property="originName"/>
+        <result column="CHANGE_NAME" property="changeName"/>
+        <result column="UPLOAD_DATE" property="uploadDate"/>
+        <result column="FILE_LEVEL" property="fileLevel"/>
+        <result column="STATUS" property="status"/>
+    </resultMap>
+    <select id="selectBoardCount" resultType="_int">
+        SELECT COUNT(*)
+        FROM BOARD
+        WHERE STATUS = 'Y'
+    </select>
+    <select id="selectBoardList" resultMap="boardResult">
+        SELECT BOARD_NO,
+                BOARD_TITLE
+                BOARD_WRITER,
+                ORIGIN_NAME,
+                COUNT,
+                TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS CREATE_DATE
+        FROM BOARD
+        WHERE STATUS = 'Y'
+        ORDER BY BOARD_NO DESC
+    </select>
+    <insert id="insertBoard">
+        INSERT INTO BOARD(
+            BOARD_NO,
+            BOARD_TITLE,
+            BOARD_WRITER,
+            BOARD_CONTENT,
+            ORIGIN_NAME,
+            CHANGE_NAME
+        ) VALUES (
+            SEQ_BNO.NEXTVAL,
+            #{boardTitle},
+            #{boardWriter},
+            #{boardContent},
+            #{originName},
+            #{changeName}
+        )
+    </insert>
+    <update id="increaseCount">
+        UPDATE BOARD SET COUNT = COUNT + 1
+        WHERE BOARD_NO = #{bno}
+        AND STATUS = 'Y'
+    </update>
+    <select id="selectBoard" resultMap="boardResult">
+        SELECT BOARD_NO,
+                BOARD_TITLE,
+                BOARD_WRITER,
+                TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS CREATE_DATE,
+                CHANGE_NAME,
+                ORIGIN_NAME,
+                BOARD_CONTENT
+        FROM BOARD
+        WHERE BOARD_NO = #{bno}
+              AND STATUS = 'Y'
+    </select>
+    <insert id="insertReply">
+        INSERT INTO REPLY(
+            REPLY_NO,
+            REPLY_CONTENT,
+            REF_BNO,
+            REPLY_WRITER
+        ) VALUES(
+            SEQ_RNO.NEXTVAL,
+            #{replyContent},
+            #{refBno},
+            #{replyWriter}
+        )
+    </insert>
+    <select id="selectReplyList" resultMap="replyResult">
+        SELECT REPLY_NO,
+                REPLY_CONTENT,
+                REF_BNO,
+                REPLY_WRITER,
+                TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS CREATE_DATE
+        FROM REPLY
+        WHERE REF_BNO = #{refBno}
+          AND STATUS = 'Y'
+        ORDER BY REPLY_NO DESC
+    </select>
+    <update id="updateBoard">
+        UPDATE BOARD
+        SET BOARD_TITLE = #{boardTitle},
+            ORIGIN_NAME = #{originName},
+            CHANGE_NAME = #{changeName},
+            BOARD_CONTENT = #{boardContent},
+        WHERE BOARD_NO = #{boardNo}
+        AND STATUS = 'Y'
+    </update>
+    <update id="deleteBoard">
+        UPDATE BOARD SET STATUS = 'N'
+        WHERE BOARD_NO = #{bno}
+    </update>
+    <select id="selecttop5BoardList" resultMap="boardResult">
+        <!--SELECT
+            BOARD_NO,
+            BOARD_TITLE,
+            BOARD_WRITER,
+            ORIGIN_NAME,
+            COUNT,
+            TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS CREATE_DATE
+        FROM (
+            SELECT BOARD_NO,
+                BOARD_TITLE,
+                BOARD_WRITER,
+                ORIGIN_NAME,
+                COUNT,
+                CREATE_DATE
+            FROM BOARD
+            WHERE STATUS = 'Y'
+            ORDER BY COUNT DESC
+        )
+        WHERE ROWNUM&lt;=5
+        ORDER BY ROWNUM-->
+        SELECT BOARD_NO,
+        BOARD_TITLE,
+        BOARD_WRITER,
+        TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS CREATE_DATE,
+        COUNT,
+        ORIGIN_NAME
+        FROM BOARD
+        WHERE STATUS = 'Y'
+        ORDER BY COUNT DESC
+    </select>
+    <select id="selectPBoardList" resultMap="PboardResult">
+        SELECT PBOARD_NO,
+                PBOARD_TITLE,
+                PBOARD_WRITER,
+                CHANGE_NAME,
+                COUNT,
+        TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS CREATE_DATE
+        FROM PICTUREBOARD P JOIN ATTACHMENT A ON (PBOARD_NO = REF_BNO)
+        WHERE P.STATUS = 'Y'
+        AND FILE_LEVEL = 1
+        ORDER BY PBOARD_NO DESC
+    </select>
+    <insert id="insertPBoard" parameterType="PictureBoard">
+        <selectKey keyProperty="pboardNo" order="BEFORE" resultType="_int">
+            SELECT SEQ_PNO.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO PICTUREBOARD(
+        PBOARD_NO,
+        PBOARD_TITLE,
+        PBOARD_WRITER
+        ) VALUES(
+        #{pboardNo},
+        #{pboardTitle},
+        #{pboardWriter}
+        )
+    </insert>
+    <insert id="insertAttachment" parameterType="Attachment">
+        INSERT INTO ATTACHMENT(
+        FILE_NO,
+        REF_BNO,
+        ORIGIN_NAME,
+        CHANGE_NAME,
+        FILE_LEVEL
+        ) VALUES(
+        SEQ_FNO.NEXTVAL,
+        #{refBno},
+        #{originName},
+        #{changeName},
+        #{fileLevel}
+        )
+    </insert>
+    <update id="increasePCount">
+        UPDATE PICTUREBOARD SET COUNT = COUNT + 1
+        WHERE PBOARD_NO = #{bno}
+        AND STATUS = 'Y'
+    </update>
+    <select id="selectPBoard" resultMap="PboardResult">
+        SELECT PBOARD_NO,
+        PBOARD_TITLE,
+        PBOARD_WRITER,
+        CHANGE_NAME,
+        COUNT,
+        TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS CREATE_DATE
+        FROM PICTUREBOARD P JOIN ATTACHMENT A ON (PBOARD_NO = REF_BNO)
+        WHERE P.STATUS = 'Y'
+        AND PBOARD_NO = #{bno}
+        AND FILE_LEVEL = 1
+    </select>
+    <select id="selectAttachmentList" resultMap="AttachmentResult">
+        SELECT CHANGE_NAME,
+            FILE_NO
+        FROM ATTACHMENT
+        WHERE REF_BNO = #{bno}
+        AND STATUS = 'Y'
+        AND FILE_LEVEL = 2
+    </select>
+    <update id="updatePBoard">
+        UPDATE PICTUREBOARD
+        SET PBOARD_TITLE = #{pboardTitle},
+        BOARD_CONTENT = #{boardContent},
+        WHERE BOARD_NO = #{boardNo}
+        AND STATUS = 'Y'
+    </update>
+    <update id="updateAttachment">
+        UPDATE ATTACHMENT
+        SET ORIGIN_NAME = #{originName},
+        CHANGE_NAME = #{changeName},
+        BOARD_CONTENT = #{boardContent},
+        WHERE FILE_NO = #{fileNo}
+        AND STATUS = 'Y'
+    </update>
+</mapper>

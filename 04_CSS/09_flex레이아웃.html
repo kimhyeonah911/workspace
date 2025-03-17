@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex레이아웃</title>
+    <style>
+        .container{
+            border: 3px solid black;
+            display: flex; /* block | inline-block | inline | none(공간을 차지하지 않음) */
+            visibility: visible; /* visible | hidden(공간은 그대로 두고 안 보이게 할 수 있음)*/
+        }
+
+        .flex-item{
+            color: black;
+            font-size: 50px;
+            padding: 24px;
+            text-align: center;
+            border: 1px solid red;
+            width: 100px;
+            flex: 1;
+            /* float : left; 띄워서 정렬*/
+        }
+
+        .item1{background: red;}
+        .item2{background: orange;}
+        .item3{background: yellow;}
+        .item4{background: green;}
+        .item5{background: blue;}
+        .item6{background: purple;}
+
+        .container2{
+            height: 500px;
+            border: 3px solid black;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .flex-item2{
+            color: black;
+            font-size: 50px;
+            padding: 24px;
+            text-align: center;
+            border: 1px solid red;
+            width: 100px;
+        }
+
+        #flex-btn{
+            background: orange;
+            color: white;
+            border-radius: 12px;
+            padding: 12px 24px;
+            width: 100px;
+            height: 40px;
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #flex-btn:hover{
+            scale: 0.98;
+            opacity: 0.9;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Flex레이아웃</h1>
+    <p>
+        웹페이지 레이아웃을 효율적으로 구성하기 위한 기술, flexbox를 사용하면<br>
+        요소들을 부모 컨테이너에서 유연하게 정렬하고 배치할 수 있다.<br><br>
+
+        특정 요소에 display : flex -> 해당 요소를 flex 컨테이너로 사용하겠다.<br>
+        flex-direction : row, column > 주 축(가로/세로) 방향 지정<br>
+        justify-content : 주 축의 정렬을 어떻게 할 것인가<br>
+        align-items: 교차축을 어떻게 정렬할 것인가? <br>
+        (flex-start, flex-end, conter, space-around, space-between) <br><br>
+
+        flexboxContainer에 flex: number -> 남는 공간을 number에 비율로 할당하겠다.
+    </p>
+
+    <div class="container">
+        <div class="flex-item item1">1번</div>
+        <div class="flex-item item2" style="flex: 2;">2번</div>
+        <div class="flex-item item3">3번</div>
+    </div>
+
+
+    <br><br><br>
+    <div class="container2">
+        <div class="flex-item2 item1">1번</div> 
+        <div class="flex-item2 item2">2번</div> 
+        <div class="flex-item2 item3">3번</div> 
+        <div class="flex-item2 item4">4번</div> 
+        <div class="flex-item2 item5">5번</div> 
+        <div class="flex-item2 item6">6번</div> 
+    </div>
+
+    <button id="flex-btn">클릭</button>
+</body>
+</html>

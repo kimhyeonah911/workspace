@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="installedFeatures">
+		<item value="org.eclipse.dltk.core.index.lucene:6.4.1.202405291003"/>
+		<item value="org.eclipse.dltk.core:6.4.1.202405291003"/>
+		<item value="org.eclipse.draw2d:3.22.0.202411181923"/>
+		<item value="org.eclipse.gef:3.22.0.202411181923"/>
+		<item value="org.eclipse.graphiti.feature:0.19.2.202311281543"/>
+		<item value="org.eclipse.jpt.jpadiagrameditor.feature:1.2.300.v202307260736"/>
+		<item value="org.eclipse.php:8.2.0.202311292129"/>
+		<item value="org.eclipse.wst.jsdt.chromium.debug.feature:0.7.0.v202307190351"/>
+		<item value="org.eclipse.wst.jsdt.feature:2.4.500.v202307190318"/>
+		<item value="org.eclipse.wst.json_ui.feature:1.1.11.v202308160419"/>
+		<item value="org.eclipse.wst.web_ui.feature:3.31.0.v202405130132"/>
+	</list>
+	<section name="SaveAsDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="223"/>
+		<item key="DIALOG_Y_ORIGIN" value="137"/>
+		<item key="DIALOG_WIDTH" value="525"/>
+		<item key="DIALOG_HEIGHT" value="580"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+</section>
