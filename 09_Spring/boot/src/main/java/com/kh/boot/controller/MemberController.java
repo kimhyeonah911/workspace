@@ -1,6 +1,7 @@
 package com.kh.boot.controller;
 
 import com.kh.boot.domain.vo.Member;
+import com.kh.boot.service.GoogleAPIService;
 import com.kh.boot.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +43,13 @@ public class MemberController {
 
     private final MemberService memberService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final GoogleAPIService googleAPIService;
 
     @Autowired
-    public MemberController(MemberService memberService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public MemberController(MemberService memberService, BCryptPasswordEncoder bCryptPasswordEncoder, GoogleAPIService googleAPIService) {
         this.memberService = memberService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.googleAPIService = googleAPIService;
     }
     /*
         spring에서 클라이언트가 보낸 정보를 받는 방법
@@ -155,6 +158,25 @@ public class MemberController {
         System.out.println(loginMember);
 
         //url재요청을 원할시 return 내용을 redirect:재요청url로 해주면 됨
+        return mv;
+    }
+
+    @GetMapping("login.go")
+    public ModelAndView loginGoogle(String code, ModelAndView mv, HttpSession session){
+        System.out.println(code);
+        String memberId = googleAPIService.requestGoogleEmail(code);
+
+        Member loginMember = memberService.loginMember(memberId);
+
+        if(loginMember == null){
+            session.setAttribute("alertMsg", "회원가입 후 이용이 가능합니다.");
+            mv.setViewName("redirect:/enrollForm.me?memberId=" + memberId);
+        } else{
+            session.setAttribute("loginUser", loginMember);
+            mv.setViewName("redirect:/");
+
+        }
+
         return mv;
     }
 
