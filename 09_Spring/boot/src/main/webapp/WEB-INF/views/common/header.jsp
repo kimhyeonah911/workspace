@@ -216,7 +216,7 @@
         </div>
         <div id="header_2">
             <ul>
-                <li><a href="">HOME</a></li>
+                <li><a href="list.fo">설문게시판</a></li>
                 <li><a href="main.air">대기오염정보</a></li>
                 <li><a href="list.bo">자유게시판</a></li>
                 <li><a href="plist.bo">사진게시판</a></li>
@@ -280,9 +280,9 @@
                 success: function(res){
                     console.log(res);
                     const url = 'https://accounts.google.com/o/oauth2/v2/auth?client_id='
-                    + res.clientId + "&redirect_uri=" + res.redirectUrl + "&response_type=code"
-                    + "&scope=email profile";
-
+                    + res.clientId + "&redirect_uri="
+                    + res.redirectUrl + "&response_type=code"
+                    + "&scope=email profile https://www.googleapis.com/auth/drive";
                     location.href = url;
                 }, error: function(err){
                     console.log("login config info ajax 실패")

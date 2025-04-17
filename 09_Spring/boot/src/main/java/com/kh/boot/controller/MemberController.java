@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Map;
+
 @Controller
 public class MemberController {
     /*
@@ -155,8 +157,6 @@ public class MemberController {
             mv.setViewName("redirect:/");
 
         }
-        System.out.println(loginMember);
-
         //url재요청을 원할시 return 내용을 redirect:재요청url로 해주면 됨
         return mv;
     }
@@ -164,7 +164,8 @@ public class MemberController {
     @GetMapping("login.go")
     public ModelAndView loginGoogle(String code, ModelAndView mv, HttpSession session){
         System.out.println(code);
-        String memberId = googleAPIService.requestGoogleEmail(code);
+        Map<String, String> userInfo = googleAPIService.requestGoogleUserInfo(code);
+        String memberId = userInfo.get("email");
 
         Member loginMember = memberService.loginMember(memberId);
 
@@ -173,6 +174,7 @@ public class MemberController {
             mv.setViewName("redirect:/enrollForm.me?memberId=" + memberId);
         } else{
             session.setAttribute("loginUser", loginMember);
+            session.setAttribute("access_token", userInfo.get("access_token"));
             mv.setViewName("redirect:/");
 
         }
