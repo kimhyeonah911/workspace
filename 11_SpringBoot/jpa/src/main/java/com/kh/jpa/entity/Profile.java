@@ -15,9 +15,7 @@ public class Profile {
     @Column(name = "PROFILE_ID")
     private Long profileId;
 
-    //회원 : 프로필 (1 : 1)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID", unique = true)
+    @OneToOne(mappedBy = "profile")
     private Member member;
 
     @Column(name = "PROFILE_IMAGE", length = 100)

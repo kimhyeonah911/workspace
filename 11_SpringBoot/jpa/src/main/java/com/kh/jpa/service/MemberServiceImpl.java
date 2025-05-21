@@ -3,12 +3,12 @@ package com.kh.jpa.service;
 import com.kh.jpa.dto.MemberDto;
 import com.kh.jpa.entity.Member;
 import com.kh.jpa.repository.MemberRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,10 +27,25 @@ public class MemberServiceImpl implements MemberService {
 
     @Transactional(readOnly = true)
     @Override
+    public List<MemberDto.Response> findAllMember() {
+        return memberRepository.findAll().stream()
+                .map(MemberDto.Response::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    @Override
     public MemberDto.Response findMember(String userId) {
         return memberRepository.findOne(userId)
                         .map(MemberDto.Response::toDto)
                         .orElseThrow(()-> new IllegalArgumentException("존재하지 않는 회원입니다."));
+    }
+
+    @Override
+    public List<MemberDto.Response> findByName(String name) {
+        return memberRepository.findByName(name).stream()
+                .map(MemberDto.Response::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override

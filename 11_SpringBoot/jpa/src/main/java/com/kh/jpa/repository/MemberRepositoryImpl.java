@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -21,8 +22,21 @@ public class MemberRepositoryImpl implements MemberRepository{
     }
 
     @Override
+    public List<Member> findAll() {
+        //JPQL : 엔티티 기반 쿼리를 전달하는 방법
+        return em.createQuery("select m from Member m", Member.class).getResultList();
+    }
+
+    @Override
     public Optional<Member> findOne(String userId) {
         return Optional.ofNullable(em.find(Member.class, userId));
+    }
+
+    @Override
+    public List<Member> findByName(String name) {
+        String query = "select m from Member m where m.userName LIKE :name"; // %지원%
+        return em.createQuery(query, Member.class).
+                setParameter("name", "%" + name + "%").getResultList();
     }
 
     @Override

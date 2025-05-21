@@ -36,3 +36,114 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection wa
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 13 more
+2025-05-20 12:06:03.756213+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "PROFILE_ID" not found; SQL statement:
+-- PROFILE_ID = 3
+
+INSERT INTO PUBLIC.MEMBER 
+(USER_ID, USER_PWD, USER_NAME, EMAIL, GENDER, PHONE, ADDRESS, ENROLL_DATE, MODIFY_DATE, STATUS, AGE, PROFILE_ID) 
+VALUES 
+('admin', 'admin1234', '관리자', 'admin@site.com', 'F', '010-1111-2222', '서울 강남구', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Y', 35, 1) [42122-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:786)
+	at org.h2.command.Parser.parseColumn(Parser.java:1171)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1156)
+	at org.h2.command.Parser.parseInsert(Parser.java:1530)
+	at org.h2.command.Parser.parsePrepared(Parser.java:698)
+	at org.h2.command.Parser.parse(Parser.java:581)
+	at org.h2.command.Parser.parse(Parser.java:556)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2025-05-20 12:06:03.771213+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "PROFILE_ID" not found; SQL statement:
+INSERT INTO PUBLIC.MEMBER 
+(USER_ID, USER_PWD, USER_NAME, EMAIL, GENDER, PHONE, ADDRESS, ENROLL_DATE, MODIFY_DATE, STATUS, AGE, PROFILE_ID) 
+VALUES 
+('user01', 'pass01', '홍길동', 'user01@site.com', 'M', '010-2222-3333', '서울 마포구', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Y', 28, 2) [42122-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:786)
+	at org.h2.command.Parser.parseColumn(Parser.java:1171)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1156)
+	at org.h2.command.Parser.parseInsert(Parser.java:1530)
+	at org.h2.command.Parser.parsePrepared(Parser.java:698)
+	at org.h2.command.Parser.parse(Parser.java:581)
+	at org.h2.command.Parser.parse(Parser.java:556)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2025-05-20 12:06:03.772213+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "PROFILE_ID" not found; SQL statement:
+INSERT INTO PUBLIC.MEMBER 
+(USER_ID, USER_PWD, USER_NAME, EMAIL, GENDER, PHONE, ADDRESS, ENROLL_DATE, MODIFY_DATE, STATUS, AGE, PROFILE_ID) 
+VALUES 
+('user02', 'pass02', '김말똥', 'user02@site.com', 'F', '010-3333-4444', '부산 해운대구', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Y', 25, 3) [42122-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:786)
+	at org.h2.command.Parser.parseColumn(Parser.java:1171)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1156)
+	at org.h2.command.Parser.parseInsert(Parser.java:1530)
+	at org.h2.command.Parser.parsePrepared(Parser.java:698)
+	at org.h2.command.Parser.parse(Parser.java:581)
+	at org.h2.command.Parser.parse(Parser.java:556)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2025-05-20 12:10:27.147439+09:00 jdbc[25]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-232]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:217)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:134)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:291)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:811)
+	at org.h2.server.web.WebApp.login(WebApp.java:1038)
+	at org.h2.server.web.WebApp.process(WebApp.java:226)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.WebThread.process(WebThread.java:154)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection was not closed by the application and is garbage collected [90018-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 13 more

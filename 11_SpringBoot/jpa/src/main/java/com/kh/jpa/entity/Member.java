@@ -23,8 +23,10 @@ public class Member {
     @Column(name = "USER_ID", length = 30)
     private String userId;
 
-    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
-    private Profile profiles;
+    //회원 : 프로필 (1 : 1)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "PROFILE_ID", unique = true)
+    private Profile profile;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Notice> notices = new ArrayList<>();

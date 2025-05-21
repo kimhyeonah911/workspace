@@ -25,6 +25,11 @@ public class Notice {
     @JoinColumn(name = "NOTICE_WRITER", nullable = false)
     private Member member;
 
+    public void changeMember(Member member) {
+        this.member = member;
+        member.getNotices().add(this);
+    }
+
     @Column(name = "NOTICE_CONTENT", length = 200, nullable = false)
     private String noticeContent;
 
@@ -34,5 +39,10 @@ public class Notice {
     @PrePersist
     public void prePersist() {
         this.createDate = LocalDateTime.now();
+    }
+
+    public void updateNoticeInfo(String noticeTitle, String noticeContent) {
+        this.noticeTitle = noticeTitle;
+        this.noticeContent = noticeContent;
     }
 }
