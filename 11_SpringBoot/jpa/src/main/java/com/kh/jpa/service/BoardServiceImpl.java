@@ -12,6 +12,7 @@ import com.kh.jpa.repository.TagRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,8 +80,8 @@ public class BoardServiceImpl implements BoardService {
                 //tag를 이름으로 조회해서 없으면 새로 만들어라
                 Tag tag = tagRepository.findByTagName(tagName)
                         .orElseGet(() -> tagRepository.save(Tag.builder()
-                                                            .tagName(tagName)
-                                                            .build()));
+                                .tagName(tagName)
+                                .build()));
                 BoardTag boardTag = BoardTag.builder()
                         .tag(tag)
                         .build();
@@ -119,7 +120,7 @@ public class BoardServiceImpl implements BoardService {
             //기존 BoardTags -> 연결이 끊기면 필요 X
             //연결된 boardTag의 영속성을 제거한다 -> orphanRemoval = true 설정이 되어있다면 실제 db 에서 제거
             board.getBoardTags().clear();
-            
+
             for(String tagName : updateDto.getTags()) {
                 Tag tag = tagRepository.findByTagName(tagName)
                         .orElseGet(() -> tagRepository.save(Tag.builder()
